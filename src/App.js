@@ -14,11 +14,16 @@ export default function App() {
   }
   
   React.useEffect(()=>{
-    if (textarea.current) {
-      textarea.current.focus();
-    }
+    textarea.current.focus();
 
-    (started && timeRemaining > 0) && setTimeout(()=>setTimeRemaining(prev=>prev-1), 1000)
+    if (started && timeRemaining > 0) {
+      setTimeout(()=>setTimeRemaining(prev=>prev-1), 1000)
+    } else if (timeRemaining === 0) {
+      setStarted(false)
+      let words = input.trim().split(" ")
+      words = words.filter(word => word !== "")
+      setCount(words.length)
+    }
   },[started, timeRemaining])
 
   function startGame() {
@@ -27,17 +32,6 @@ export default function App() {
     setCount(0)
     setStarted(prev=>prev===false && true)
   }
-
-  React.useEffect(()=>{
-    if (timeRemaining === 0) {
-      setStarted(false)
-    }
-    let words = input.trim().split(" ")
-    words = words.filter(word => word !== "")
-    setCount(words.length)
-
-  },[timeRemaining])
-
 
   return(
     <main>
