@@ -6,7 +6,6 @@ export default function App() {
   const [input, setInput] = React.useState("")
   const [count, setCount] = React.useState(0)
   const [timeRemaining, setTimeRemaining] = React.useState(10)
-
   const textarea = React.useRef(null);
 
   function handleChange(event) {
